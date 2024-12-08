@@ -17,13 +17,17 @@ import retrofit2.Response;
 public class TMDBService {
 
     TMDBApiService tmdbApiService;
+    String accessToken;
 
     public TMDBService(){
         tmdbApiService = RetrofitInstance.getApiService();
     }
 
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
     public LiveData<List<MovieDto>> searchMovieByName(String name){
-        String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYWJiYjlhODZkZDc1Y2Q4NGM4MDM4ZjI5Y2VlNGIxMiIsIm5iZiI6MTczMzMyODYyNi43MzUwMDAxLCJzdWIiOiI2NzUwN2VmMjM1NWRiYzBiMTVkN2IyZjIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.I180H8CfolN62cbkgPWiQu-a7XHy7zLsO26CreoI7Qk";
         // retrofit
         MutableLiveData<List<MovieDto>> responseLiveData = new MutableLiveData<List<MovieDto>>();
         tmdbApiService.getPopularMovies("Bearer " + accessToken, name).enqueue(new Callback<MovieResponse>() {
