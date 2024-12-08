@@ -1,4 +1,4 @@
-package com.example.mpprojectmtvtracker.Entity;
+package com.example.mpprojectmtvtracker.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

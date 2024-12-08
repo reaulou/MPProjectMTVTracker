@@ -1,4 +1,4 @@
-package com.example.mpprojectmtvtracker.ViewModel;
+package com.example.mpprojectmtvtracker.viewmodel;
 
 import android.app.Application;
 
@@ -6,9 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.mpprojectmtvtracker.Entity.Movie;
-import com.example.mpprojectmtvtracker.Repository.MovieRepository;
-import com.example.mpprojectmtvtracker.Repository.MovieRepositoryThread;
+import com.example.mpprojectmtvtracker.entity.Movie;
+import com.example.mpprojectmtvtracker.repository.MovieRepositoryThread;
 
 import java.util.List;
 

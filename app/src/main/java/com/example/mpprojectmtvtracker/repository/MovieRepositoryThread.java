@@ -1,12 +1,12 @@
-package com.example.mpprojectmtvtracker.Repository;
+package com.example.mpprojectmtvtracker.repository;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.mpprojectmtvtracker.AppDatabase;
-import com.example.mpprojectmtvtracker.DAO.MovieDao;
-import com.example.mpprojectmtvtracker.Entity.Movie;
+import com.example.mpprojectmtvtracker.dao.MovieDao;
+import com.example.mpprojectmtvtracker.entity.Movie;
 
 import java.util.List;
 

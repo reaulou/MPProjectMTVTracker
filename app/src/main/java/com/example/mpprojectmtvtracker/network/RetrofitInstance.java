@@ -1,4 +1,4 @@
-package com.example.mpprojectmtvtracker.Network;
+package com.example.mpprojectmtvtracker.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

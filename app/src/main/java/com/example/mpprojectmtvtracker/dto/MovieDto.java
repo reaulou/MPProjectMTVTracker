@@ -1,4 +1,4 @@
-package com.example.mpprojectmtvtracker.DTO;
+package com.example.mpprojectmtvtracker.dto;
 
 import com.google.gson.annotations.SerializedName;
 

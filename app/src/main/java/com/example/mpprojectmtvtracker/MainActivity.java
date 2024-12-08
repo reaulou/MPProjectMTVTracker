@@ -10,10 +10,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.mpprojectmtvtracker.DTO.MovieDto;
-import com.example.mpprojectmtvtracker.Entity.Movie;
-import com.example.mpprojectmtvtracker.Service.TMDBService;
-import com.example.mpprojectmtvtracker.ViewModel.MovieViewModel;
+import com.example.mpprojectmtvtracker.dto.MovieDto;
+import com.example.mpprojectmtvtracker.entity.Movie;
+import com.example.mpprojectmtvtracker.service.TMDBService;
+import com.example.mpprojectmtvtracker.viewmodel.MovieViewModel;
 
 import java.util.List;
 

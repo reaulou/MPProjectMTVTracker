@@ -1,11 +1,11 @@
-package com.example.mpprojectmtvtracker.DAO;
+package com.example.mpprojectmtvtracker.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.mpprojectmtvtracker.Entity.User;
+import com.example.mpprojectmtvtracker.entity.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.mpprojectmtvtracker.DAO;
+package com.example.mpprojectmtvtracker.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.mpprojectmtvtracker.Entity.Movie;
+import com.example.mpprojectmtvtracker.entity.Movie;
 
 import java.util.List;
 

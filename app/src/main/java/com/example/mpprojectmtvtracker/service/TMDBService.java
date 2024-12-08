@@ -1,12 +1,12 @@
-package com.example.mpprojectmtvtracker.Service;
+package com.example.mpprojectmtvtracker.service;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.mpprojectmtvtracker.DTO.MovieDto;
-import com.example.mpprojectmtvtracker.Network.MovieResponse;
-import com.example.mpprojectmtvtracker.Network.RetrofitInstance;
-import com.example.mpprojectmtvtracker.Network.TMDBApiService;
+import com.example.mpprojectmtvtracker.dto.MovieDto;
+import com.example.mpprojectmtvtracker.network.MovieResponse;
+import com.example.mpprojectmtvtracker.network.RetrofitInstance;
+import com.example.mpprojectmtvtracker.network.TMDBApiService;
 
 import java.util.List;
 

@@ -9,10 +9,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.mpprojectmtvtracker.DAO.MovieDao;
-import com.example.mpprojectmtvtracker.DAO.UserDao;
-import com.example.mpprojectmtvtracker.Entity.Movie;
-import com.example.mpprojectmtvtracker.Entity.User;
+import com.example.mpprojectmtvtracker.dao.MovieDao;
+import com.example.mpprojectmtvtracker.dao.UserDao;
+import com.example.mpprojectmtvtracker.entity.Movie;
+import com.example.mpprojectmtvtracker.entity.User;
 
 @Database(entities = {User.class, Movie.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

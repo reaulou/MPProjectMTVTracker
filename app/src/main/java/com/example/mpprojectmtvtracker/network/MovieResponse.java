@@ -1,6 +1,6 @@
-package com.example.mpprojectmtvtracker.Network;
+package com.example.mpprojectmtvtracker.network;
 
-import com.example.mpprojectmtvtracker.DTO.MovieDto;
+import com.example.mpprojectmtvtracker.dto.MovieDto;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
