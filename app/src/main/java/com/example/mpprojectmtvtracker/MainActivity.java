@@ -1,5 +1,6 @@
 package com.example.mpprojectmtvtracker;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mpprojectmtvtracker.dto.MovieDto;
 import com.example.mpprojectmtvtracker.entity.Movie;
+import com.example.mpprojectmtvtracker.entity.Show;
+import com.example.mpprojectmtvtracker.repository.MovieRepositoryThread;
+import com.example.mpprojectmtvtracker.repository.ShowRepository;
 import com.example.mpprojectmtvtracker.service.TMDBService;
 import com.example.mpprojectmtvtracker.util.TokenManager;
 import com.example.mpprojectmtvtracker.viewmodel.MovieViewModel;
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         EditText tokenInput = findViewById(R.id.token_input);
         Button submitButton = findViewById(R.id.submit_button);
@@ -69,13 +75,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        System.out.println("testo8821");
+
         // view model setup
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-
+        System.out.println("testo8821");
         Movie mov1 = new Movie("Interstellar", "Space Movie", "watched");
         movieViewModel.deleteAllMovies();
         movieViewModel.insert(mov1);
-
+        System.out.println("testo8821");
         movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> models) {
@@ -86,5 +94,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println("testo8821");
+        //show code
+//        Context context = this;
+//        ShowRepository showRepository = new ShowRepository((Application) context);
+//
+//        Show show1 = new Show("ATLA", "Adventure show", "watced");
+//        showRepository.insert(show1);
+//
+//        Show show2 = new Show("ATLA", "Adventure show", "watced");
+//        showRepository.insert(show1);
+//
+//        List<Show> shows = showRepository.getAllShows();
+//
+//        int te = 0;
+
     }
 }
