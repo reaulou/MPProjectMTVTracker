@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
         Movie mov1 = new Movie("Interstellar", "Space Movie", "watched");
-        movieViewModel.deleteAllMovies();
+        //movieViewModel.deleteAllMovies();
         movieViewModel.insert(mov1);
 
         movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
@@ -86,5 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println("debugjuan123");
     }
 }
