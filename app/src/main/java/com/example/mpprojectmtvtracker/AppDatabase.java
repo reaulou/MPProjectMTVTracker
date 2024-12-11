@@ -17,7 +17,7 @@ import com.example.mpprojectmtvtracker.entity.Movie;
 import com.example.mpprojectmtvtracker.entity.Show;
 import com.example.mpprojectmtvtracker.entity.User;
 
-@Database(entities = {User.class, Movie.class, Show.class}, version = 1)
+@Database(entities = {User.class, Movie.class, Show.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
     public abstract UserDao userDao();

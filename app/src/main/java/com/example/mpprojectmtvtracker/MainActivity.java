@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // view model setup
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         System.out.println("testo8821");
-        Movie mov1 = new Movie("Interstellar", "Space Movie", "watched");
+        Movie mov1 = new Movie("Interstellarioo", "Space Movie", "watched");
         movieViewModel.deleteAllMovies();
         movieViewModel.insert(mov1);
         System.out.println("testo8821");
@@ -95,19 +95,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         System.out.println("testo8821");
-        //show code
-//        Context context = this;
-//        ShowRepository showRepository = new ShowRepository((Application) context);
-//
-//        Show show1 = new Show("ATLA", "Adventure show", "watced");
-//        showRepository.insert(show1);
-//
-//        Show show2 = new Show("ATLA", "Adventure show", "watced");
-//        showRepository.insert(show1);
-//
-//        List<Show> shows = showRepository.getAllShows();
-//
-//        int te = 0;
+        // show code
+        Context context = this;
+        ShowRepository showRepository = new ShowRepository(context, shows -> {
+            runOnUiThread(() -> {
+                System.out.println("debugjuan123: " + shows.size());
+                Toast.makeText(this, "Shows loaded: " + shows.size(), Toast.LENGTH_SHORT).show();
+            });
+        });
 
+        Show show1 = new Show("ATLA", "Adventure show", "watced");
+        showRepository.insert(show1);
+
+        Show show2 = new Show("ATLA", "Adventure show", "watced");
+        showRepository.insert(show1);
+
+        List<Show> shows = showRepository.getAllShows();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<Show> showss = showRepository.getAllShows();
+        int te = 0;
     }
 }
