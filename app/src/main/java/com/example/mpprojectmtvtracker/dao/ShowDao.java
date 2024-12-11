@@ -1,6 +1,5 @@
 package com.example.mpprojectmtvtracker.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -26,5 +25,5 @@ public interface ShowDao {
     void deleteAllShows();
 
     @Query("SELECT * FROM show_table")
-    LiveData<List<Show>> getAllShows();
+    List<Show> getAllShows();
 }

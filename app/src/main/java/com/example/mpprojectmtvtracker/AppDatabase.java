@@ -1,6 +1,7 @@
 package com.example.mpprojectmtvtracker;
 
 import android.content.Context;
+import android.content.Entity;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.example.mpprojectmtvtracker.entity.Movie;
 import com.example.mpprojectmtvtracker.entity.Show;
 import com.example.mpprojectmtvtracker.entity.User;
 
-// version increment
+//version increment
 @Database(entities = {User.class, Movie.class, Show.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
