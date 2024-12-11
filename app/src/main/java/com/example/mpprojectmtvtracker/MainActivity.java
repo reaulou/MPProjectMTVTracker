@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         showRepository.insert(show1);
 
         Show show2 = new Show("Cyberpunk", "Scifi Dystopia", "watched");
-        showRepository.insert(show1);
+        showRepository.insert(show2);
 
         try {
             Thread.sleep(2000);
