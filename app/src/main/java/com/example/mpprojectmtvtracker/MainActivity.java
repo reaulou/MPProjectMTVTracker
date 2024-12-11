@@ -1,11 +1,9 @@
 package com.example.mpprojectmtvtracker;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,28 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mpprojectmtvtracker.dto.MovieDto;
 import com.example.mpprojectmtvtracker.entity.Movie;
 import com.example.mpprojectmtvtracker.entity.Show;
-import com.example.mpprojectmtvtracker.repository.MovieRepositoryThread;
+import com.example.mpprojectmtvtracker.repository.MovieRepository;
 import com.example.mpprojectmtvtracker.repository.ShowRepository;
 import com.example.mpprojectmtvtracker.service.TMDBService;
 import com.example.mpprojectmtvtracker.util.TokenManager;
-import com.example.mpprojectmtvtracker.viewmodel.MovieViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MovieViewModel movieViewModel;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("debugjuan123: Start main activity");
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -43,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
 
         EditText tokenInput = findViewById(R.id.token_input);
         Button submitButton = findViewById(R.id.submit_button);
@@ -58,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             if (!token.isEmpty()) {
                 tokenManager.setAccessToken(token);
                 serviceTMDB.setAccessToken(token);
-                System.out.println("[debugjuan]Token: " + token);
+                System.out.println("debugjuan123: Token: " + token);
                 Toast.makeText(this, "Token saved securely!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Please enter a valid token.", Toast.LENGTH_SHORT).show();
@@ -75,28 +69,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        System.out.println("testo8821");
-
-        // view model setup
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-        System.out.println("testo8821");
-        Movie mov1 = new Movie("Interstellarioo", "Space Movie", "watched");
-        movieViewModel.deleteAllMovies();
-        movieViewModel.insert(mov1);
-        System.out.println("testo8821");
-        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> models) {
-                for(Movie movie : models) {
-                    System.out.println(movie.getId());
-                    System.out.println(movie.getMovieName());
-                    System.out.println(movie.getMovieDescription());
-                }
-            }
+        MovieRepository movieRepository = new MovieRepository(context, movies->{
+            runOnUiThread(()->{
+                System.out.println("debugjuan123: " + movies.size());
+                Toast.makeText(this, "Shows loaded: " + movies.size(), Toast.LENGTH_SHORT).show();
+            });
         });
-        System.out.println("testo8821");
+        //movieRepository.deleteAllMovies();
+        Movie mov1 = new Movie("Interstellarioo", "Space Movie", "watched");
+        movieRepository.insert(mov1);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<Movie> movies = movieRepository.getAllMovies();
+        for(Movie movie : movies) {
+            System.out.println(movie.getId());
+            System.out.println(movie.getMovieName());
+            System.out.println(movie.getMovieDescription());
+        }
+
         // show code
-        Context context = this;
         ShowRepository showRepository = new ShowRepository(context, shows -> {
             runOnUiThread(() -> {
                 System.out.println("debugjuan123: " + shows.size());
@@ -104,19 +98,27 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-        Show show1 = new Show("ATLA", "Adventure show", "watced");
+        Show show1 = new Show("ATLA", "Adventure show", "watched");
         showRepository.insert(show1);
 
-        Show show2 = new Show("ATLA", "Adventure show", "watced");
+        Show show2 = new Show("Cyberpunk", "Scifi Dystopia", "watched");
         showRepository.insert(show1);
 
-        List<Show> shows = showRepository.getAllShows();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         List<Show> showss = showRepository.getAllShows();
+        if(showss.size() > 6){
+            showRepository.deleteAllShows();
+            System.out.println("Show table exceeded 6 items, deleted all items");
+        }
+        for(Show show : showss) {
+            System.out.println(show.getId());
+            System.out.println(show.getShowName());
+            System.out.println(show.getShowDescription());
+        }
         int te = 0;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mpprojectmtvtracker.repository;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
@@ -11,27 +12,26 @@ import com.example.mpprojectmtvtracker.entity.Movie;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class MovieRepositoryThread {
+public class MovieRepository {
 
     // below line is the create a variable
     // for dao and list for all courses.
     private MovieDao movieDao;
-    private LiveData<List<Movie>> allMovies;
+    private List<Movie> allMoviesCache;
+
     private final ExecutorService executorService;
 
     // creating a constructor for our variables
     // and passing the variables to it.
-    public MovieRepositoryThread(Application application) {
+    public MovieRepository(Context application, Callback<List<Movie>> callback) {
         AppDatabase database = AppDatabase.getInstance(application);
         movieDao = database.movieDao();
-        allMovies = movieDao.getAllMovies();
         this.executorService = AppExecutors.getExecutorService();
 
-        // get all movies
         executorService.execute(() -> {
-            allMovies = movieDao.getAllMovies();
+            allMoviesCache = movieDao.getAllMovies();
+            callback.onResult(allMoviesCache);
         });
     }
 
@@ -56,8 +56,8 @@ public class MovieRepositoryThread {
     }
 
     // below method is to read all the courses.
-    public LiveData<List<Movie>> getAllMovies() {
-        return allMovies;
+    public List<Movie> getAllMovies() {
+        return allMoviesCache;
     }
     // Callback interface
     public interface Callback<T> {
