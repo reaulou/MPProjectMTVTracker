@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TMDBSearchActivity">
+
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:weightSum="100"
+        >
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_weight="9"-->
+<!--            android:weightSum="100">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/tmdb_search_search_bar"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:ems="10"-->
+<!--                android:inputType="text"-->
+<!--                android:text="Search"-->
+<!--                android:layout_weight="90"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/tmdb_search_search_button"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:icon="@drawable/baseline_search_10"-->
+<!--                android:layout_weight="10"/>-->
+<!--        </LinearLayout>-->
+        <SearchView
+            android:id="@+id/tmdb_search_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search TMDB"
+            android:layout_weight="9"
+            android:background="@drawable/border"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tmdb_search_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="85" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="6" >
+            <Button
+                android:id="@+id/tmdb_search_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

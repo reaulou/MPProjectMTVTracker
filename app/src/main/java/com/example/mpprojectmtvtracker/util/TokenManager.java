@@ -9,9 +9,9 @@ public class TokenManager {
         this.accessToken = accessToken;
     }
 
-    public static TokenManager getInstance(String accessToken) {
+    public static TokenManager getInstance() {
         if (instance == null) {
-            instance = new TokenManager(accessToken);
+            instance = new TokenManager("dummyToken123");
         }
         return instance;
     }

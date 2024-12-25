@@ -1,6 +1,7 @@
 package com.example.mpprojectmtvtracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mpprojectmtvtracker.dto.MovieDto;
+import com.example.mpprojectmtvtracker.dto.MovieImageDto;
 import com.example.mpprojectmtvtracker.entity.Movie;
 import com.example.mpprojectmtvtracker.entity.Show;
 import com.example.mpprojectmtvtracker.repository.MovieRepository;
@@ -42,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         EditText tokenInput = findViewById(R.id.token_input);
         Button submitButton = findViewById(R.id.submit_button);
+        Button goToSearchTMDB = findViewById(R.id.main_go_to_search_tmdb);
 
         // get access token
-        TokenManager tokenManager = TokenManager.getInstance("dummytoken123");
+        TokenManager tokenManager = TokenManager.getInstance();
         TMDBService serviceTMDB = new TMDBService();
         // Save token on button click and view
         submitButton.setOnClickListener(v -> {
@@ -54,20 +57,38 @@ public class MainActivity extends AppCompatActivity {
                 serviceTMDB.setAccessToken(token);
                 System.out.println("debugjuan123: Token: " + token);
                 Toast.makeText(this, "Token saved securely!", Toast.LENGTH_SHORT).show();
+
+                serviceTMDB.searchMovieByName("Jack+Reacher").observe(this, new Observer<List<MovieDto>>() {
+                    @Override
+                    public void onChanged(List<MovieDto> movieDtos) {
+                        for(MovieDto movieDto : movieDtos){
+                            System.out.println(movieDto.getId());
+                            System.out.println("TMDBService name: " + movieDto.getTitle());
+                        }
+                    }
+                });
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                serviceTMDB.getMovieImages(75780).observe(this, new Observer<List<MovieImageDto>>() {
+                    @Override
+                    public void onChanged(List<MovieImageDto> movieImageDtos) {
+                        for(MovieImageDto movieImageDto : movieImageDtos){
+                            System.out.println("TMDBService path: " + movieImageDto.getFilePath());
+                        }
+                        System.out.println("testdebug999");
+                    }
+                });
             } else {
                 Toast.makeText(this, "Please enter a valid token.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        serviceTMDB.searchMovieByName("Jack+Reacher").observe(this, new Observer<List<MovieDto>>() {
-            @Override
-            public void onChanged(List<MovieDto> movieDtos) {
-                for(MovieDto movieDto : movieDtos){
-                    System.out.println(movieDto.getId());
-                    System.out.println("TMDBService: " + movieDto.getTitle());
-                }
-            }
-        });
+
 
         MovieRepository movieRepository = new MovieRepository(context, movies->{
             runOnUiThread(()->{
@@ -120,5 +141,13 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(show.getShowDescription());
         }
         int te = 0;
+
+        //
+        goToSearchTMDB.setOnClickListener(v->{
+            Intent goToSearchTMDBIntent = new Intent(context, TMDBSearchActivity.class);
+
+            context.startActivity(goToSearchTMDBIntent);
+        });
+
     }
 }
